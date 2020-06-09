@@ -1,0 +1,154 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+h2, h3, h4 {
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-weight: 900;
+    font-size: 4rem;
+    text-transform: uppercase;
+}
+img.rounded-circle {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 3px solid #71f0cc;
+}
+/*a {
+    color: #222;
+}*/
+
+/* NAVBAR */
+.navbar {
+    text-transform: uppercase;
+}
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #FFF;
+}
+.navbar-brand:hover {
+    color:#b806ff;
+}
+/*.navbar-brand span {
+    color: #00b380;
+}
+.navbar-brand span:hover {
+    color: #c346f5;
+}*/
+.nav-link {
+    color: white; /*#222;*/
+    font-weight: 700;
+}
+.nav-link:hover {
+    color: #71f0cc;
+}
+
+/* HERO */
+.hero {
+    position: relative;
+}
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6rem;
+    border: 1px solid black;
+}
+
+/* Call to action */
+.dark-background {
+    background-color: black;
+    color: white;
+}
+.dark-background span {
+    color: #46f5c3;
+}
+.dark-background span:hover {
+    color: #c346f5;
+}
+.bright span {
+    color: #00b380;
+}
+.bright span:hover {
+    color: #c346f5;
+}
+.btn-main {
+    background-color: #71f0cc;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.btn-main:hover {
+    background-color: #c346f5;
+
+}
+
+/* SERVICES */
+.services p {
+    margin: 0;
+}
+.service-icon {
+    background-color: #00b380;
+}
+.service-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+/* TESTIMONIALS */
+.slider-item {
+    display: none;
+}
+.active-slider-item {
+    display: block;
+}
+
+/* TEAM */
+.team-social-links {
+    background-color: black;
+    align-content: center;
+    justify-content: center;
+    padding: 2%;
+}
+.team-social-links a {
+    color: white;
+    font-size: xx-small;
+}
+.team-social-links a:hover {
+    color: #c346f5;
+}
+.team-social-links i {
+    padding: 2% 10%;
+    align-self: auto;
+}
+
+/* FOOTER */
+.footer-social-links span {
+    color: #00b380;
+}
+.footer-social-links span:hover {
+    color: #c346f5;
+}
+.footer-social-links i {
+    padding: 20px;
+}
+.footer-social-links a {
+    color: white;
+    font-size: smaller;
+}
+.footer-social-links a:hover {
+    color: #c346f5;
+}
+footer input, footer textarea {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+}
