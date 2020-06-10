@@ -16,4 +16,8 @@
         <input type="text" name="note" placeholder="Enter Note Here">
         <button>Add Note</button>
     </form>
+    <!-- Probably a better way -->
+    <form action="{{ url_for('clear') }}" method="get">
+        <button>Clear</button>
+    </form>
 {% endblock %}
