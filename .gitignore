@@ -1,1 +1,4 @@
-img/*
+aux/*
+*/.sass-cache/*
+*.map
+

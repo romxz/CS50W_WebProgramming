@@ -1,0 +1,14 @@
+@import url(p1.css);
+.table-special td, .table-super-special td {
+  color: black; }
+
+#table-container tr {
+  color: #b806ff; }
+
+.table-special td {
+  background-color: #ff0066; }
+
+.table-super-special td {
+  background-color: #84d9fe; }
+
+/*# sourceMappingURL=p2.css.map */

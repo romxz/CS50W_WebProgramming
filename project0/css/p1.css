@@ -1,8 +1,4 @@
-/*Colors
-Black background:   222
-Primary Color:      3ab5fe
-White:              fafaff
-*/
+@import "main.css";
 
 @media (min-width: 1200px) {
     body {
@@ -11,7 +7,7 @@ White:              fafaff
 }
 @media (max-width: 1200px) {
     body {
-        background-color: #008855;
+        background-color: #71f0cc;
     }
 }
 @media (max-width: 992px) {
@@ -28,6 +24,29 @@ White:              fafaff
     body {
         background-color: #FF5555;
     }
+}
+
+#table-container {
+    justify-content: center;
+}
+#table-container table {
+    border: 2px solid black;
+    border-collapse: collapse;
+    width: 90%;
+}
+#table-container th, td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+#table-container th {
+    background-color: #71f0cc;
+    color: black;
+}
+#table-title {
+    color: #71f0cc;
+    display: flex;
+    justify-content: center;
 }
 
 /*#hello > h1 {

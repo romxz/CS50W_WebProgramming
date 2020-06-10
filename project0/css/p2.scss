@@ -1,0 +1,29 @@
+@import "p1.css";
+
+$purps: #b806ff;
+$dpink: #ff0066;
+$lskyblue: #84d9fe;
+
+%data-focus {
+    color: black;
+}
+
+#table-container {
+    tr {
+        color: $purps;
+    }
+}
+
+.table-special {
+    td {
+        @extend %data-focus;
+        background-color: $dpink;
+    }
+}
+
+.table-super-special {
+    td {
+        @extend %data-focus;
+        background-color: $lskyblue;
+    }
+}
