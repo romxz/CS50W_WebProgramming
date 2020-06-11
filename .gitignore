@@ -8,3 +8,4 @@ __pycache__/
 flask_session/
 .vscode/
 lecture3/src3/.pylintrc
+.goodreads
