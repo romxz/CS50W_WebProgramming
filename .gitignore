@@ -6,3 +6,4 @@ aux/*
 __pycache__/
 */flask_session/
 flask_session/
+.vscode/
