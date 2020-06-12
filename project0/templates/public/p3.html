@@ -1,0 +1,55 @@
+{% extends "public/layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="css/p2.css">
+<title>Finish It</title>
+{% endblock %}
+
+{% block hero %}
+<img class="img-fluid" alt="" src="img/cubyBlack.png">
+<div class="hero-text p-5 justify-content-center" style="color:white;">
+    <h1>Finish <br> It</h1>
+</div>
+{% endblock %}
+
+{% block body %}
+<!-- Data -->
+<section class="dark-background my-5">
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-4">
+                <img alt="" class="img-fluid" src="img/eelo.png">
+            </div>
+            <div class="col-md-8">
+                <div class="row" id="table-title">
+                    <h2>Other types of things</h2>
+                </div>
+                <div class="row" id="table-container">
+                    <table>
+                        <tr>
+                            <th>First</th>
+                            <th>Second</th>
+                            <th>Third</th>
+                        </tr>
+                        <tr>
+                            <td>Data1</td>
+                            <td>Data2</td>
+                            <td>Data3</td>
+                        </tr>
+                        <tr class="table-special">
+                            <td>Data4</td>
+                            <td>Data5</td>
+                            <td>Data6</td>
+                        </tr>
+                        <tr class="table-super-special">
+                            <td>Data7</td>
+                            <td>Data8</td>
+                            <td>Data9</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
