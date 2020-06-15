@@ -41,7 +41,6 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
     
-
     from .database import db
     db.init_app(app)
     
@@ -49,12 +48,15 @@ def create_app(test_config=None):
     # Initialize SQLAlchemy with flask app
     db.init_app(app)
 
-    # blueprint for non-auth routes of app
-    from .main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
+    
     '''
+    
     # blueprint for auth routes in app
     from .auth import bp as auth_blueprint
     app.register_blueprint(auth_blueprint)
+
+    # blueprint for non-auth routes of app
+    from .main import bp as main_blueprint
+    app.register_blueprint(main_blueprint)
 
     return app

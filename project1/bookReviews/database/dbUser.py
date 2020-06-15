@@ -1,27 +1,31 @@
 import hashlib, binascii
 import os
+#from werkzeug.security import check_password_hash, generate_password_hash
 
-
-def get_new_khash(username: str, password: str) -> str:
+def get_new_khash(password: str) -> str:
     return _make_hash(password, binascii.b2a_hex(os.urandom(32)).decode())
 
 def _get_db_hash(db: 'Database', username: str):
     return db.execute(
-        "SELECT khash FROM users WHERE username = :username", 
+        "SELECT khash FROM users WHERE username = :username;", 
         {"username": username}).fetchone()
 
 def has_user(db: 'Database', username: str):
     return _get_db_hash(db, username) is not None
 
-def authenticate(db: 'Database', username: str, password: str):
+def authenticate(db: 'Database', username: str, password: str) -> (bool, int):
+    uid, uname, khash = _get_user(db, username)
+    if khash == _make_hash(password, khash[:64]):
+        return True, uid
+    else:
+        return False, None
     try:
-        khash, = _get_db_hash(db, username)
-        return khash == _make_hash(password, khash[:64])
+        pass
     except:
-        return False
+        return False, uid
 
 def insert_new_user(db: 'Database', username: str, password: str, commit=True):
-    return _insert_user_khash(db, username, get_new_khash(username, password), commit=commit)
+    return _insert_user_khash(db, username, get_new_khash(password), commit=commit)
 
 def _insert_user_khash(db: 'Database', username: str, khash: str, commit=True):
     try:
@@ -33,6 +37,11 @@ def _insert_user_khash(db: 'Database', username: str, khash: str, commit=True):
     except:
         return False
 
+def _get_user(db: 'Database', username: str):
+    return db.execute(
+        'SELECT * FROM users WHERE username = :username;',
+        {'username': username}).fetchone()
+
 def delete_user(db: 'Database', username: str, commit=True):
     db.execute(
         "DELETE FROM users WHERE username = :username;",
@@ -41,9 +50,3 @@ def delete_user(db: 'Database', username: str, commit=True):
 
 def _make_hash(password: str, salt: str) -> str:
     return salt+binascii.b2a_hex(hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), binascii.a2b_hex(salt), 100_000)).decode()
-
-#def main():
-#    pass
-
-#if __name__ == "__main__":
-#    main()

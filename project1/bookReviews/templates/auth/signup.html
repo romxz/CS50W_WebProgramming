@@ -1,0 +1,19 @@
+{% extends "auth/register.html" %}
+
+{% block form %}
+<form class="signup-form" method="POST">
+    <h2>{% block title%}Sign up{% endblock %}</h2>
+    
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Create Username" name="username" id="username" required>
+    
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+    <button type="submit" class="btn">Sign up</button>
+
+    {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+</form>
+{% endblock %}

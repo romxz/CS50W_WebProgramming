@@ -1,0 +1,150 @@
+{% extends "public/layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+<!--<link rel="stylesheet" href="css/main.css">-->
+<title>My Webpage</title>
+{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <img class="img-fluid" alt="" src="{{ url_for('static', filename='img/cuby.png') }}">
+    <div class="hero-text p-5">
+        <h1>Book <br> Reviews</h1>
+    </div>
+</section>
+{% endblock %}
+
+{% block body %}
+<!-- Call to action -->
+<section class="dark-background py-5">
+    <div class="container">
+        <div class="row"> <!--style="margin-top:40px;" --><!--offset-md-1-->
+            <div class="col-md-8 col-lg-8"> <!--style="border:1px dotted white;"-->
+                <h2 class="dark-title">Write some Book<span>Reviews!</span></h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse congue nisi sed quam convallis, lobortis ullamcorper lacus volutpat. Etiam dignissim neque commodo, euismod tortor vitae, fermentum purus. Nam ornare dolor sit amet tincidunt sodales.
+                </p>
+            </div>
+            <div class="col-md-3 offset-md-1 col-lg-3 offset-lg-1">
+                <a class="btn btn-main mt-5" href="p1.html">
+                    <i class="mr-2 fa fa-bullhorn" aria-hidden="true"></i> Get Started
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Testimonials -->
+<section class="dark-background py-5">
+    <div class="container">
+        <div class="slider-item active-slider-item">
+            <div class="row"> <!--style="margin-top:40px;" --><!--offset-md-1-->
+                <div class="col-md-8 col-lg-8"> <!--style="border:1px dotted white;"-->
+                    <h2 class="dark-title">Here is what Obu <span>thinks</span> about Book<span>Reviews:</span></h2>
+                    
+                    <p>
+                        <i class="mr-2 fa fa-quote-left" aria-hidden="true"></i>
+                        Glob blub glub blub blog blub blagh glab glub glob
+                        <i class="ml-2 fa fa-quote-right" aria-hidden="true"></i>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img alt="" class="img-fluid rounded-circle" src="{{ url_for('static', filename='img/octoP.png') }}">
+                </div>
+            </div>
+        </div>
+        <div class="slider-item">
+            <div class="row"> <!--style="margin-top:40px;" --><!--offset-md-1-->
+                <div class="col-md-8 col-lg-8"> <!--style="border:1px dotted white;"-->
+                    <h2 class="dark-title">Here is what Stu <span>thinks</span> about Book<span>Reviews:</span></h2>
+                    
+                    <p>
+                        <i class="mr-2 fa fa-quote-left" aria-hidden="true"></i>
+                        Glob blub glub blub blog blub blagh glab glub glob
+                        <i class="ml-2 fa fa-quote-right" aria-hidden="true"></i>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img alt="" class="img-fluid rounded-circle" src="{{ url_for('static', filename='img/purple-fisho.png') }}">
+                </div>
+            </div>
+        </div>
+        <div class="slider-item">
+            <div class="row"> <!--style="margin-top:40px;" --><!--offset-md-1-->
+                <div class="col-md-8 col-lg-8"> <!--style="border:1px dotted white;"-->
+                    <h2 class="dark-title">Here is what Gary <span>thinks</span> about Book<span>Reviews:</span></h2>
+                    
+                    <p>
+                        <i class="mr-2 fa fa-quote-left" aria-hidden="true"></i>
+                        Glob blub glub blub blog blub blagh glab glub glob
+                        <i class="ml-2 fa fa-quote-right" aria-hidden="true"></i>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img alt="" class="img-fluid rounded-circle" src="{{ url_for('static', filename='img/eelo.png') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team -->
+<section class="bright py-5">
+    <div class="container">
+        <h2 class="section-heading">Our <span>Team</span></h2>
+        <div class="row">
+            <div class="col-md-4">
+                <article class="shadow p-0">
+                    <div style="background-color: black;"><img class="img-fluid mx-auto" src="{{ url_for('static', filename='img/juago-lot.png') }}"></div>
+                    <div class="team-social-links">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube"></i></a>
+                    </div>
+                    <div class="team-content p-3">
+                        <h3>Juago Lot</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <a class="btn btn-main" href="">Learn more</a>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-4">
+                <article class="shadow p-0">
+                    <div style="background-color: black;"><img class="img-fluid mx-auto" src="{{ url_for('static', filename='img/juago-lot.png') }}"></div>
+                    <div class="team-social-links">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube"></i></a>
+                    </div>
+                    <div class="team-content p-3">
+                        <h3>Juago Lot</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <a class="btn btn-main" href="">Learn more</a>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-4">
+                <article class="shadow p-0">
+                    <div style="background-color: black;"><img class="img-fluid mx-auto" src="{{ url_for('static', filename='img/juago-lot.png') }}"></div>
+                    <div class="team-social-links">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube"></i></a>
+                    </div>
+                    <div class="team-content p-3">
+                        <h3>Juago Lot</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <a class="btn btn-main" href="">Learn more</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/sliding.js') }}"></script>
+
+{% endblock %}
