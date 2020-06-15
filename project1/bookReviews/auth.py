@@ -1,16 +1,22 @@
-from flask import Blueprint
-from . import db
+import functools
 
-auth = Blueprint('auth', __name__)
+from flask import (
+    Blueprint, flash, g, redirect, render_template, request, session, url_for
+)
+from werkzeug.security import check_password_hash, generate_password_hash
 
-@auth.route('/login')
+from .database.db import get_db
+
+bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+@bp.route('/login')
 def login():
     return 'Login'
 
-@auth.route('/signup')
+@bp.route('/signup')
 def signup():
     return 'Signup'
 
-@auth.route('/logout')
+@bp.route('/logout')
 def logout():
     return 'Logout'

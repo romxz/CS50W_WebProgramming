@@ -2,8 +2,9 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-# init SQLAlchemy so we can use it later in models
-db = SQLAlchemy()
+## check .database instead
+### init SQLAlchemy so we can use it later in models
+###db = SQLAlchemy()
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)  # instance_relative_config=True
@@ -26,7 +27,7 @@ def create_app(test_config=None):
         if not os.getenv("DATABASE_URL"): 
             raise RuntimeError("DATABASE_URL is not set")
         else: 
-            app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+            app.config['DATABASE_URL'] = os.getenv("DATABASE_URL")
     else:
         app.config.from_mapping(test_config)
 
@@ -35,22 +36,25 @@ def create_app(test_config=None):
         pass #os.makedirs(app.instance_path)
     except OSError:
         pass
-    
-    '''
-    # Initialize SQLAlchemy with flask app
-    db.init_app(app)
-
-    # blueprint for auth routes in app
-    from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
-
-    # blueprint for non-auth routes of app
-    from .main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
-    '''
 
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
     
+
+    from .database import db
+    db.init_app(app)
+    
+    '''
+    # Initialize SQLAlchemy with flask app
+    db.init_app(app)
+
+    # blueprint for non-auth routes of app
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+    '''
+    # blueprint for auth routes in app
+    from .auth import bp as auth_blueprint
+    app.register_blueprint(auth_blueprint)
+
     return app
