@@ -22,10 +22,14 @@ def authenticate(db: 'Database', username: str, password: str):
         return False
 
 def insert_user(db: 'Database', username: str, khash: str, commit=True):
-    db.execute(
-        "INSERT INTO users (username, khash) VALUES (:username, :khash);",
-        {"username": username, "khash": khash})
-    if commit: db.commit()
+    try:
+        db.execute(
+            "INSERT INTO users (username, khash) VALUES (:username, :khash);",
+            {"username": username, "khash": khash})
+        if commit: db.commit()
+        return True
+    except:
+        return False
 
 def delete_user(db: 'Database', username: str, commit=True):
     db.execute(

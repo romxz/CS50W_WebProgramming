@@ -1,8 +1,9 @@
 import os
 
-from flask import Flask, session, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for
+from flask import request, session
 from flask_session import Session
-from database import dbConnect
+from database import dbConnect, dbUser
 
 import requests
 
@@ -12,7 +13,7 @@ app = Flask(__name__)
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
+sess = Session(app)
 
 db = dbConnect.getDatabase()
 
@@ -23,34 +24,39 @@ gk = ''
 # Routes
 @app.route("/")
 def main():
-    return render_template("public/index.html")
+    return render_template("/public/index.html")
 
 @app.route("/index.html", methods=["GET"])
 def index():
-    return render_template("public/index.html")
+    return render_template("/public/index.html")
 
 @app.route("/log_in.html", methods=["GET"])
 def log_in():
-    return render_template("public/log_in.html")#
+    return render_template("/public/log_in.html", exists=False)#
+
+#@app.route("/js/<string:loc>.js", methods=["GET"])
+#def js(loc):
+#    if loc in ['scrolling', 'sliding']:
+#        return redirect(url_for('static', filename=f'js/{loc}.js'))
+#    else: return ''
 
 
-#@app.route("/img/<string:loc>.png", methods=["GET"])
-#def image(loc):
-#    return redirect(url_for('static', filename=f'img/{loc}.png'))
 
-@app.route("/js/<string:loc>.js", methods=["GET"])
-def js(loc):
-    if loc in ['scrolling', 'sliding']:
-        return redirect(url_for('static', filename=f'js/{loc}.js'))
-    else: return ''
+@app.route("/user/new_user.html", methods=["POST"])
+def new_user():
+    username = request.form.get("username")
+    if dbUser.has_user(db, username):  # User exists, can't create anew
+        return render_template("/public/log_in.html", exists=True)
+    else:
+        password = request.form.get("psw")
+        khash = dbUser.get_new_credentials(username, password)
+        success = dbUser.insert_user(db, username, khash)
+        if success:
+            # TODO: Continue here
+            return render_template("/public/log_in.html", exists=False)
+        else:
+            pass
 
-@app.route("/css/<string:loc>.css", methods=["GET"])
-def css(loc):
-    return redirect(url_for('static', filename=f'css/{loc}.css'))
-
-#@app.route("/img/<string:loc>.png", methods=["GET"])
-#def img(loc):
-#    return redirect(url_for('static', filename=f'img/{loc}.png'))#
 
 # Other
 def grapi():

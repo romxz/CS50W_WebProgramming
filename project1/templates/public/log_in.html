@@ -1,7 +1,7 @@
 {% extends "public/layout.html" %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 <title>My Webpage</title>
 
 <style>
@@ -79,12 +79,14 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <form action="/user/new.html" class="signup-form">
+                <form action="/user/new_user.html" class="signup-form" method="POST">
                     <h2>Sign up</h2>
                     
                     <label for="username"><b>Username</b></label>
                     <input type="text" placeholder="Create Username" name="username" required>
-                    
+                    {% if exists %}
+                    <div>Please choose another username</div>
+                    {% endif %}
                     <label for="psw"><b>Password</b></label>
                     <input type="password" placeholder="Enter Password" name="psw" required>
             
@@ -92,7 +94,7 @@
                 </form>
             </div>
             <div class="col-md-6">
-                <form action="/user/new.html" class="signup-form">
+                <form action="/user/sign_in.html" class="signup-form" method="POST">
                     <h2>Log in</h2>
                     
                     <label for="username"><b>Username</b></label>
@@ -107,28 +109,4 @@
         </div>
     </div>
 </div>
-
-<!--<img class="img-fluid" alt="" src="img/cuby2.png">-->
-<!--<div class="hero-text p-5">
-    <h1>Book <br> Reviews</h1>
-</div>-->
-
-<!--
-<div class="container dark-background py-5">
-    <div class="row py-5">
-        <div class="col-md-6 offset-md-1">
-            <h2 class="footer-logo">Book<span>Reviews</span></h2>
-            <p>Sign up to write some book reviews!</p>
-        </div>
-        <div class="col-md-4 offset-md-1">
-            <form >
-                <input type="text" placeholder="Your Email">
-                <input type="password" placeholder="Your Password">
-                <a class="btn btn-main" href="">
-                    <i class="mr-2 fa fa-envelope" aria-hidden="true"></i> Sign up!
-                </a>
-            </form>
-        </div>
-    </div>
-</div>-->
 {% endblock %}
