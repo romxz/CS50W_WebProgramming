@@ -1,0 +1,134 @@
+{% extends "public/layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<title>My Webpage</title>
+
+<style>
+    /*
+    .body, html {
+        height: 100%;
+    }*/
+
+    .signup-container {
+        /* The image used */
+        background-image: url("{{ url_for('static', filename='img/cuby2.png') }}");
+
+        /* Control height of the image */
+        box-sizing: border-box;
+        min-height: 760px; /*380px;*/
+
+        /* Center and scale image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+    }
+
+    .signup-form {
+        box-sizing: inherit;
+        position: absolute;
+        margin: 40px;
+        max-width: 500px;
+        padding: 20px;
+        background-color: black;
+        color: #f1f1f1;
+    }
+
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    input[type=text]:focus, input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    .btn {
+        background-color: #71f0cc;
+        color: black;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .btn:hover {
+        opacity: 1;
+        background-color: #c346f5;
+    }
+
+    /*:root { url("var(--signup-background-url)") no-repeat 0px 0px;
+        --signup-background-url: ""
+    }*/
+</style>
+{% endblock %}
+
+{% block hero %}
+<!--<img class="img-fluid" alt="" src="img/cuby2.png">-->
+{% endblock %}
+
+{% block body %}
+<div class="signup-container">
+    <div class="container">
+        <div class="py-5">
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/user/new.html" class="signup-form">
+                    <h2>Sign up</h2>
+                    
+                    <label for="username"><b>Username</b></label>
+                    <input type="text" placeholder="Create Username" name="username" required>
+                    
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+            
+                    <button type="submit" class="btn">Sign up</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form action="/user/new.html" class="signup-form">
+                    <h2>Log in</h2>
+                    
+                    <label for="username"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="username" required>
+                    
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+            
+                    <button type="submit" class="btn">Log in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<img class="img-fluid" alt="" src="img/cuby2.png">-->
+<!--<div class="hero-text p-5">
+    <h1>Book <br> Reviews</h1>
+</div>-->
+
+<!--
+<div class="container dark-background py-5">
+    <div class="row py-5">
+        <div class="col-md-6 offset-md-1">
+            <h2 class="footer-logo">Book<span>Reviews</span></h2>
+            <p>Sign up to write some book reviews!</p>
+        </div>
+        <div class="col-md-4 offset-md-1">
+            <form >
+                <input type="text" placeholder="Your Email">
+                <input type="password" placeholder="Your Password">
+                <a class="btn btn-main" href="">
+                    <i class="mr-2 fa fa-envelope" aria-hidden="true"></i> Sign up!
+                </a>
+            </form>
+        </div>
+    </div>
+</div>-->
+{% endblock %}
