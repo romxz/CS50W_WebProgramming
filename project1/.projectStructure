@@ -1,0 +1,13 @@
+- project
+---- templates
+-------- public
+------------ base.html <!-- contains common layout and links -->
+------------ index.html <!-- show homepage -->
+------------ login.html <!-- show login form -->
+------------ signup.html <!-- show signup form -->
+-------- user <!-- contains user-specific pages -->
+------------ profile.html <!-- show the user profile page -->
+---- __init__.py <!-- app setup -->
+---- auth.py <!-- auth routes for app -->
+---- main.py <!-- non-auth routes for app -->
+---- models.py <!-- user model -->

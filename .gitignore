@@ -11,3 +11,4 @@ lecture3/src3/.pylintrc
 .goodreads
 .database_url
 **.pyc
+.skey
