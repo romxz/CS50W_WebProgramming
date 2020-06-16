@@ -28,7 +28,7 @@ def login():
             session.clear()
             session['user_id'] = uid
             session['user_name'] = username
-            return redirect(url_for('main.index'))
+            return redirect(url_for('index'))
         
         flash(error)
 

@@ -58,5 +58,6 @@ def create_app(test_config=None):
     # blueprint for non-auth routes of app
     from .main import bp as main_blueprint
     app.register_blueprint(main_blueprint)
-
+    app.add_url_rule('/', endpoint='index')
+    
     return app

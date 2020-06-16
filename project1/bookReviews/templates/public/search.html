@@ -1,0 +1,201 @@
+{% extends "public/layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+<title>Search Books</title>
+
+<style>
+    /* .body, html { height: 100%; } */
+    .search-container {
+        /* The image used */
+        background-image: url("{{ url_for('static', filename='img/cuby.png') }}");
+
+        /* Control height of the image */
+        box-sizing: border-box;
+        min-height: 760px; /*380px;*/
+
+        /* Center and scale image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        font-size: small;
+        /*
+        border-radius: 5px;
+        border-color: black;
+        border-width: 10px;
+        border-style: double;*/
+    }
+    .search-container h2 {
+        font-size: x-large;
+    }
+
+    .search-form {
+        box-sizing: inherit;
+        /*position: absolute;*/
+        margin: auto; /*10px;*/
+        width: 80%;
+        max-width: 700px;
+        padding: 20px;
+        background-color: black;
+        color: #f1f1f1;
+        /*justify-self: center;
+        align-self: center;*/
+    }
+    .search-results {
+        box-sizing: inherit;
+        /*position: absolute;*/
+        margin: auto; /*10px;*/
+        width: 100%;
+        /*max-width: 1000px;*/
+        padding: 20px;
+        background-color: black;
+        color: #f1f1f1;
+        font-size: smaller;
+    }
+
+    input[type=text], input[type=title], input[type=author] {
+        width: 80%;
+        
+        padding: 10px;
+        margin: 5px 0 22px 25px;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    input[type=text]:focus, input[type=title]:focus, input[type=author]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    .btn {
+        background-color: #71f0cc;
+        color: black;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 80%;
+    }
+
+    .btn-checkout {
+        padding: 4px 6px;
+        width: 80%;
+    }
+
+    .btn:hover {
+        opacity: 1;
+        background-color: #c346f5;
+    }
+
+    .table-container {
+        justify-content: center;
+    }
+    .table-container table {
+        border: 2px solid black;
+        border-collapse: collapse;
+        width: 90%;
+    }
+    .table-container th, td {
+        border: 1px solid black;
+        padding: 5px;
+        text-align: center;
+    }
+    .table-container th {
+        background-color: #71f0cc;
+        color: black;
+    }
+    .table-title {
+        color: #71f0cc;
+        display: flex;
+        justify-content: center;
+    }
+</style>
+{% endblock %}
+
+{% block hero %}
+<!--<img class="img-fluid" alt="" src="img/cuby2.png">-->
+{% endblock %}
+
+{% block body %}
+<div class="search-container">
+    <div class="container">
+        <div class="py-5">
+        </div>
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <form class="search-form" method="POST">
+                    <!--<h2>Search Books</h2>-->
+                    <div class="row p-0 m-0">
+                        <label class="col-md-2" for="isbn"><b>Isbn</b></label>
+                        <input class="col-md-9" type="text" placeholder="Isbn" name="isbn" id="isbn">
+                    </div>
+                    
+                    <div class="row p-0 m-0">
+                        <label class="col-md-2" for="title"><b>Title</b></label>
+                        <input class="col-md-9" type="text" placeholder="Title" name="title" id="title">
+                    </div>
+                    <div class="row p-0 m-0">
+                        <label class="col-md-2" for="author"><b>Author</b></label>
+                        <input class="col-md-9" type="text" placeholder="Author" name="author" id="author">
+                    </div>
+
+                    <div class="row p-0 m-0">
+                        <button class="btn col-md-10 offset-md-1" type="submit">Search Books</button>
+                    </div>
+                    <div class="row p-0 m-0">
+                        {% for message in get_flashed_messages() %}
+                            {% if message %}
+                            <div class="flash col-md-9 offset-md-2">{{ message }}</div>
+                            {% endif %}
+                        {% endfor %} 
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        {% if book_results %}
+        <div class="row my-2">
+            <div class="col-md-12">
+                <div class="search-results">
+                    <div class="row table-title">
+                        <h2>Search Results:</h2>
+                    </div>
+                    <div class="row table-container">
+                        <table>
+                            <tr>
+                                <th class='th-isbn'>ISBN</th>
+                                <th class='th-title'>Title</th>
+                                <th class='th-author'>Author</th>
+                                <th class='th-checkout'>Reviews</th>
+                            </tr>
+                            {% for book in book_results %}
+                            <tr>
+                                <td class='td-isbn'>{{ book['isbn'] }}</td>
+                                <td class='td-title'>{{ book['title'] }}</td>
+                                <td class='td-author'>{{ book['author'] }}</td>
+                                <td class='td-checkout'>
+                                    <a class="btn btn-checkout" href="{{ url_for('main.book', isbn=book['isbn']) }}">
+                                        <i class="fa fa-book" aria-hidden="true"></i>
+                                    </a>
+                                    <!--
+                                    <form action=>
+                                        <btn type="submit" class="btn btn-checkout">
+                                            <i class="fa fa-book" aria-hidden="true"></i>
+                                        </btn>
+                                    </form>-->
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <!--<div class="row book-result">
+                        <div class="col-md-2 book-isbn"></div>
+                        <div class="col-md-5 book-title"></div>
+                        <div class="col-md-5 book-author"></div></div>-->
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
