@@ -19,9 +19,6 @@ def profile():
 @login_required
 def book():#isbn: str):
     db = get_db()
-    #revs = db.execute(
-    #    'SELECT'
-    #)
     isbn = request.args.get('isbn')
     return f'Reviews:{isbn}'
 
