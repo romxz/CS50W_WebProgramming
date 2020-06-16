@@ -7,7 +7,7 @@ A Cool Page with some Cool Features:
 - Links to each other in the navbar for convenience
 - Some well-deserved hero welcomes
 - Responsive p#.html's
-- Some bogus cervices and tables
+- Some bogus services and tables
 - Cool testimonials by aquatic animals
 - A cool team of clones
 - A nice footer for bogus feedback
