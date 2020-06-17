@@ -37,19 +37,11 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
     
     from .database import db
-    db.init_app(app)
-    
-    '''
     # Initialize SQLAlchemy with flask app
     db.init_app(app)
-
     
-    '''
     
     # blueprint for auth routes in app
     from .auth import bp as auth_blueprint

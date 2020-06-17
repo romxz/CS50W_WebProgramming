@@ -1,0 +1,48 @@
+.signup-container {
+    /* Control height of the image */
+    box-sizing: border-box;
+    min-height: 760px; /*380px;*/
+
+    /* Center and scale image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.signup-form {
+    box-sizing: inherit;
+    position: absolute;
+    margin: 40px;
+    max-width: 500px;
+    padding: 20px;
+    background-color: black;
+    color: #f1f1f1;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.btn {
+    background-color: #71f0cc;
+    color: black;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn:hover {
+    opacity: 1;
+    background-color: #c346f5;
+}

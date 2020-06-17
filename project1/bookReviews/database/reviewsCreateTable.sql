@@ -1,7 +1,7 @@
 CREATE TABLE reviews (
-    rid SERIAL PRIMARY KEY,
     uid INTEGER REFERENCES users,
+    isbn VARCHAR REFERENCES books,
+    rating FLOAT(2) NOT NULL,
     review VARCHAR NOT NULL,
-    isbn INTEGER REFERENCES books,
-    rating FLOAT(2) NOT NULL
+    PRIMARY KEY (uid, isbn)
 );

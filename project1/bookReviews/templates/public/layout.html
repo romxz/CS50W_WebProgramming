@@ -60,35 +60,7 @@
         {% block body %}{% endblock %}
 
         <!-- Footer -->
-        <!--<link href="footer.html" rel="import" />-->
-        <!-- <div id="footer-container"></div> -->
-        <footer class="dark-background py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h2 class="footer-logo">Book<span>Reviews</span></h2>
-                        <p>Write some cool book reviews! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse congue nisi sed quam convallis, lobortis ullamcorper lacus volutpat. Etiam dignissim neque commodo, euismod tortor vitae, fermentum purus. Nam ornare dolor sit amet tincidunt sodales.</p>
-                        <div class="footer-social-links p-2">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube"></i></a>
-                        </div>
-                    </div>
-                    <form class="col-md-4 offset-md-2">
-                        <input type="text" placeholder="Your Email">
-                        <input type="text" placeholder="Other Info">
-                        <textarea placeholder="Your message"></textarea>
-                        <a class="btn btn-main" href="">
-                            <i class="mr-2 fa fa-envelope" aria-hidden="true"></i> Send!
-                        </a>
-                    </form>
-                </div>
-            </div>
-            <!-- Place attricution stuff here -->
-            <div class="attribution text-center p-3">
-                <p>Made by Me &copy; 2020. All rights reserved.</p>
-            </div>
-        </footer>
+        {% include 'public/footer.html' %}
 
         <!-- Navbar On/Off -->
         <script src="{{ url_for('static', filename='js/scrolling.js') }}"></script>

@@ -1,0 +1,109 @@
+.book-container {
+    justify-content: center;
+}
+.book-container h2 {
+    font-size: x-large;
+}
+
+.search-form {
+    box-sizing: inherit;
+    /*position: absolute;*/
+    margin: auto; /*10px;*/
+    width: 80%;
+    max-width: 700px;
+    padding: 20px;
+    background-color: black;
+    color: #f1f1f1;
+    /*justify-self: center;
+    align-self: center;*/
+}
+.search-results {
+    box-sizing: inherit;
+    /*position: absolute;*/
+    margin: auto; /*10px;*/
+    width: 100%;
+    /*max-width: 1000px;*/
+    padding: 20px;
+    background-color: black;
+    color: #f1f1f1;
+    font-size: smaller;
+}
+
+input[type=text], input[type=title], input[type=author] {
+    width: 80%;
+    
+    padding: 10px;
+    margin: 5px 0 22px 25px;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=title]:focus, input[type=author]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.btn {
+    background-color: #71f0cc;
+    color: black;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+}
+
+.btn-checkout {
+    padding: 4px 6px;
+    width: 80%;
+}
+
+.btn:hover {
+    opacity: 1;
+    background-color: #c346f5;
+}
+
+/* book-info-table */
+.book-info-container {
+    justify-content: center;
+    background-color: black;
+    color: white;
+}
+.book-info-container table {
+    border: 2px solid black;
+    border-collapse: collapse;
+    width: 90%;
+}
+.book-info-container th, td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+.book-info-container th {
+    background-color: #71f0cc;
+    color: black;
+}
+
+/* book-submit-review */
+.book-submit-review-container {
+    justify-content: center;
+    background-color: black;
+    color: white;
+}
+.book-submit-review-container h2 {
+    color: #c346f5;
+}
+/* book-list-reviews */
+.book-list-reviews-container {
+    justify-content: center;
+    background-color: black;
+    color: white;
+}
+.book-list-reviews-container .review-user {
+    color: #71f0cc;
+    font-weight: bolder;
+    padding: 5px;
+    margin: 5px;
+}
+.book-list-reviews-container .review-text {
+    color: #c346f5;
+}

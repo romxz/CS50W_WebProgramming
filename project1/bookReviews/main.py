@@ -2,9 +2,9 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from .database.db import get_db
-from .database import dbBooks
+from .database import dbBooks, dbReviews
 from .auth import login_required
-
+from .database import goodReads
 bp = Blueprint('main', __name__)
 
 @bp.route('/')
@@ -15,12 +15,73 @@ def index():
 def profile():
     return 'Profile'
 
-@bp.route('/book')
+@bp.route('/book', methods=('GET', 'POST'))
 @login_required
 def book():#isbn: str):
+    """Serves book info and its reviews"""
     db = get_db()
-    isbn = request.args.get('isbn')
-    return f'Reviews:{isbn}'
+    if request.method == "POST":
+        #g.user = {'user_id': user_id, 'user_name}
+        errors = []
+        uid = request.form.get('book-submit-review-user-id')
+        if uid is None:
+            errors.append('uid is None')
+        else:
+            uid = int(uid)
+        
+        isbn = request.form.get('book-submit-review-book-isbn')
+        if isbn is None:
+            errors.append('isbn is None')
+        
+        rating = request.form.get('book-submit-review-rating')
+        if rating is None:
+            errors.append('rating is None')
+        else: 
+            rating = float(rating)
+        
+        review = request.form.get('book-submit-review-textarea')
+        if review is None:
+            errors.append('review is None')
+        
+        if not errors:
+            dbReviews.upsert_review(db, uid, isbn, rating, review)
+            return redirect(url_for('main.book', isbn=isbn))
+        else:
+            return 'Errors: ' + '; '.join(e for e in errors)
+    else:    
+        isbn = request.args.get('isbn')
+        errors = dict()
+        
+        # fetch book by ISBN
+        book = dict()
+        try:
+            book['isbn'], book['title'], book['author'], book['year'] = dbBooks.get_isbn(db, isbn)[0]
+        except Exception as e:
+            errors['isbn'] = e
+        
+        # fetch Reviews by ISBN
+        try:
+            reviews = dbReviews.get_reviews(db, isbn)
+        except Exception as e:
+            errors['reviews'] = e
+        
+        # fetch GoodReads using API
+        try:
+            counts = dict()
+            review_data = goodReads.review_counts(isbn)['books'][0]
+            #raise Exception(review_data)
+            for data in ['average_rating', 'work_ratings_count']:
+                if data not in review_data: continue
+                counts[data] = review_data[data]
+        except Exception as e:
+            errors['goodReads'] = e
+        
+        if not errors:
+            return render_template('user/book.html', book=book, reviews=reviews, counts=counts)
+        else:
+            return 'Errors: ' + '; '.join((f'{k}:{e}' for k,e in errors.items()))
+        
+        #return f'Error={error}; tb={e}'
 
 @bp.route('/search', methods=('GET', 'POST'))
 def search():

@@ -1,0 +1,95 @@
+{% extends "public/layout.html" %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/book.css') }}">
+<style type="text/css">
+    .book-container {
+        /* Image used */
+        background-image: url("{{ url_for('static', filename='img/cuby2.png') }}");
+
+        /* Control height of the image */
+        box-sizing: border-box;
+        min-height: 760px; /*380px;*/
+
+        /* Center and scale image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        font-size: small;
+    }
+</style>
+<title>Search Books</title>
+{% endblock %}
+{% block body %}
+<div class="book-container">
+    <div class="container">
+        <div class="py-5">
+        </div>
+        <div class="row book-info-container m-2 p-2">
+            <table>
+                <tr>
+                    <th class='th-isbn'>ISBN</th>
+                    <th class='th-title'>Title</th>
+                    <th class='th-author'>Author</th>
+                    <th class='th-year'>Year</th>
+                    {% if 'average_rating' in counts %}
+                    <th class='th-avgerage-rating'>Rating</th>
+                    {% endif %}
+                    {% if 'work_ratings_count' in counts %}
+                    <th class='th-ratings-count'>No. Ratings</th>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td class='td-isbn'>{{ book['isbn'] }}</td>
+                    <td class='td-title'>{{ book['title'] }}</td>
+                    <td class='td-author'>{{ book['author'] }}</td>
+                    <td class='td-year'>{{ book['year'] }}</td>
+                    {% if 'average_rating' in counts %}
+                    <td class='td-avgerage-rating'>{{ counts['average_rating'] }}</td>
+                    {% endif %}
+                    {% if 'work_ratings_count' in counts %}
+                    <td class='td-ratings-count'>{{ counts['work_ratings_count'] }}</td>
+                    {% endif %}
+                </tr>
+            </table>
+        </div>
+        <div class="row book-submit-review-container m-2 p-2">
+            <form class="book-submit-review-form" method="POST">
+                <div class="row book-submit-review-rating-container">
+                    <div class="col-md-4"><h2>Rating</h2></div>
+                    <div class="col-md-8 ratings">
+                    {% for num in [1, 2, 3, 4, 5] %}
+                        <label for="book-submit-review-rating-{{ num }}">{{ num }}</label>
+                        <input type="radio" name="book-submit-review-rating" id="book-submit-review-rating-{{ num }}" value="{{ num }}">
+                    {% endfor %}
+                    </div>
+                </div>
+                <input type="hidden" name="book-submit-review-user-id" id="book-submit-review-user-id" value="{{ g.user['user_id'] }}">
+                <input type="hidden" name="book-submit-review-book-isbn" id="book-submit-review-book-isbn" value="{{ book['isbn'] }}" required>
+                <textarea class="col-md-12" placeholder="Review" name="book-submit-review-textarea" id="book-submit-review-textarea" required></textarea>
+                <button class="btn col-md-10 offset-md-1" type="submit">Submit Review</button>
+            </form>
+        </div>
+        {% if reviews %}
+        <div class='book-list-reviews-container m-2 p-2'>
+            {% for review in reviews %}
+            <div class='row'>
+                <div class="col-md-3">
+                    <div class="row review-user">
+                        <div class="col-md-6 title">User:</div>
+                        <div class="col-md-6 username">{{ review.username }}</div>
+                    </div>
+                    <div class="row review-rating">
+                        <div class="col-md-6 title">Rating:</div>
+                        <div class="col-md-6 rating">{{ review.rating }}</div>
+                    </div>
+                </div>
+                <div class="col-md-9 review-text">{{ review.review }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

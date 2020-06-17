@@ -14,9 +14,6 @@ def get_books(db: 'Database', searchby: dict):
     # Build query
     conditions = []
     params = {}
-    #if 'isbn' in searchby:
-    #    conditions.append('isbn = :isbn')
-    #    params['isbn'] = searchby['isbn']
     for q in ['isbn', 'title', 'author']:
         if q in searchby:
             conditions.append(f'{q} ILIKE :{q}')
