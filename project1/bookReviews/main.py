@@ -2,9 +2,9 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from .database.db import get_db
-from .database import dbBooks, dbReviews
+from .database import dbBooks, dbReviews, goodReads
 from .auth import login_required
-from .database import goodReads
+from .database.dbModels import UserReview, DatabaseReview, ReviewStats, Book
 bp = Blueprint('main', __name__)
 
 @bp.route('/')
@@ -44,7 +44,7 @@ def book():#isbn: str):
             errors.append('review is None')
         
         if not errors:
-            dbReviews.upsert_review(db, uid, isbn, rating, review)
+            dbReviews.upsert_review(db, DatabaseReview(uid=uid, isbn=isbn, rating=rating, review=review))
             return redirect(url_for('main.book', isbn=isbn))
         else:
             return 'Errors: ' + '; '.join(e for e in errors)
@@ -55,7 +55,7 @@ def book():#isbn: str):
         # fetch book by ISBN
         book = dict()
         try:
-            book['isbn'], book['title'], book['author'], book['year'] = dbBooks.get_isbn(db, isbn)[0]
+            book = dbBooks.get_isbn(db, isbn)[0]
         except Exception as e:
             errors['isbn'] = e
         
@@ -67,12 +67,7 @@ def book():#isbn: str):
         
         # fetch GoodReads using API
         try:
-            counts = dict()
-            review_data = goodReads.review_counts(isbn)['books'][0]
-            #raise Exception(review_data)
-            for data in ['average_rating', 'work_ratings_count']:
-                if data not in review_data: continue
-                counts[data] = review_data[data]
+            counts = goodReads.review_counts(isbn)
         except Exception as e:
             errors['goodReads'] = e
         

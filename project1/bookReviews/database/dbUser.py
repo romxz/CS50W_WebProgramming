@@ -1,5 +1,6 @@
 import hashlib, binascii
 import os
+from .dbModels import User
 #from werkzeug.security import check_password_hash, generate_password_hash
 
 def get_new_khash(password: str) -> str:
@@ -14,7 +15,12 @@ def has_user(db: 'Database', username: str):
     return _get_db_hash(db, username) is not None
 
 def authenticate(db: 'Database', username: str, password: str) -> (bool, int):
-    uid, uname, khash = _get_user(db, username)
+    user = _get_user(db, username)
+    if user:
+        uid, uname, khash = user
+    else:
+        return False, None
+    
     if khash == _make_hash(password, khash[:64]):
         return True, uid
     else:
@@ -37,7 +43,7 @@ def _insert_user_khash(db: 'Database', username: str, khash: str, commit=True):
     except:
         return False
 
-def _get_user(db: 'Database', username: str):
+def _get_user(db: 'Database', username: str) -> User:
     return db.execute(
         'SELECT * FROM users WHERE username = :username;',
         {'username': username}).fetchone()
