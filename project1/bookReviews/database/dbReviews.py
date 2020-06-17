@@ -19,6 +19,12 @@ def upsert_review(db: 'Database', uid: int, isbn: str, rating: float, review: st
         {'uid': uid, 'isbn': isbn, 'rating': rating, 'review': review})
     db.commit()
 
+def review_counts(db: 'Database', isbn: int):
+    return db.execute(
+        'SELECT COUNT(*) AS review_count, AVG(rating) AS average_score '
+        'FROM reviews WHERE isbn = :isbn GROUP BY isbn;',
+        {'isbn': isbn}).fetchone()
+
 """ reviews
 uid INTEGER REFERENCES users,
 isbn VARCHAR REFERENCES books,

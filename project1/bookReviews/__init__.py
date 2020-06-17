@@ -47,6 +47,10 @@ def create_app(test_config=None):
     from .auth import bp as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
+    # blueprint for api routes in app
+    from .api import bp as api_blueprint
+    app.register_blueprint(api_blueprint)
+
     # blueprint for non-auth routes of app
     from .main import bp as main_blueprint
     app.register_blueprint(main_blueprint)
