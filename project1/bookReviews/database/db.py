@@ -1,5 +1,4 @@
-#import os
-#import sqlite3 ## Using postgres for now
+# import sqlite3  # Using postgres
 import csv
 import click
 from flask import current_app, g
@@ -19,12 +18,13 @@ def get_db():
     if 'db' not in g:
         engine = create_engine(current_app.config['DATABASE_URL'])
         g.db = scoped_session(sessionmaker(bind=engine))
-        ## sqlite3 boilerplate:
-        #g.db = sqlite3.connect(
-        #    current_app.config['DATABASE_URL'],
-        #    detect_types=sqlite3.PARSE_DECLTYPES
-        #)
-        #g.db.row_factory = sqlite3.Row
+        ''' # sqlite3 boilerplate:
+        g.db = sqlite3.connect(
+            current_app.config['DATABASE_URL'],
+            detect_types=sqlite3.PARSE_DECLTYPES
+        )
+        g.db.row_factory = sqlite3.Row
+        '''
     return g.db
 
 def close_db(e=None):
@@ -102,4 +102,3 @@ def insert_books(db, commit=False):
                 {"isbn": isbn, "title": title, "author": author, "year" : int(year)})
             if commit:
                 db.commit()
-            #print(f"Added book ({isbn},{title},{author},{year}).")
