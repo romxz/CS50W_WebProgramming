@@ -13,11 +13,11 @@ def posts():
 
     # Get start and end point for posts to generate.
     start = int(request.form.get("start") or 0)
-    end = int(request.form.get("end") or (start + 9))
+    end = int(request.form.get("end") or (start + 10)) #(start + 9))
 
     # Generate list of posts.
     data = []
-    for i in range(start, end + 1):
+    for i in range(start, end):  #end + 1):
         data.append(f"Post #{i}")
 
     # Artificially delay speed of response.

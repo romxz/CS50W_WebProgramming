@@ -8,7 +8,7 @@
             }
 
             .post {
-                background-color: #77dd11;
+                background-color: #2bdfb2;
                 padding: 20px;
                 margin: 10px;
             }
@@ -40,8 +40,8 @@
 
                 // Set start and end post numbers, and update counter.
                 const start = counter;
-                const end = start + quantity - 1;
-                counter = end + 1;
+                const end = start + quantity; // - 1;
+                counter = end; // + 1;
 
                 // Open new request to get new posts.
                 const request = new XMLHttpRequest();

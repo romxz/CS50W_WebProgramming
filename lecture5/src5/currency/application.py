@@ -17,6 +17,9 @@ def convert():
     currency = request.form.get("currency")
     res = requests.get("https://api.fixer.io/latest", params={
         "base": "USD", "symbols": currency})
+    #res = requests.get("https://data.fixer.io/api/latest", params={
+    #    "base": "USD", "symbols": currency})
+    
 
     # Make sure request succeeded
     if res.status_code != 200:
