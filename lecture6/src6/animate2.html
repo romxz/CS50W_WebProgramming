@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+        <style>
+            @keyframes move {
+                0% {
+                    left: 0%;
+                    background-color: salmon;
+                }
+                50% {
+                    left: 50%;
+                    background-color: sandybrown;
+                }
+                100% {
+                    left: 0%;
+                    background-color: skyblue;
+                }
+            }
+
+            h1 {
+                position: relative;
+                animation-name: move;
+                animation-duration: 3s;
+                animation-fill-mode: forwards;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Welcome!</h1>
+    </body>
+</html>
