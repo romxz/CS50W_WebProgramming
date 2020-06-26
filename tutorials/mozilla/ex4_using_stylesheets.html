@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Changing color and font-size example</title>
+        <style rel="stylesheet">
+            body { background-color: darkblue; }
+            p { font-face: Arial; font-size: 10pt; margin-left: .125in; }
+            #lumpy { display: none; }
+        </style>
+        <script>
+        function changeText() {
+            var p = document.getElementById("pid");
+
+            p.style.color = "blue"
+            p.style.fontSize = "18pt"
+        }
+        </script>
+        <script>
+            var ss = document.styleSheets;
+
+            for(var i = 0; i < ss.length; i++) {
+                for(var j = 0; j < ss[i].cssRules.length; j++) {
+                    //dump( ss[i].cssRules[j].selectorText + "\n" );
+                    console.log( ss[i].cssRules[j].selectorText + "\n" );
+                }
+            }
+        </script>
+    </head>
+    <body>
+
+    <p id="pid" onclick="window.location.href = 'http://www.cnn.com/';">linker</p>
+
+    <form>
+    <p><input value="rec" type="button" onclick="changeText();" /></p>
+    </form>
+
+    </body>
+</html>
