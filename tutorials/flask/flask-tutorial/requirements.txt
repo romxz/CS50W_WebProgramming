@@ -5,5 +5,3 @@ SQLAlchemy
 flask_sqlalchemy
 requests
 python-dotenv
-pytest
-coverage
