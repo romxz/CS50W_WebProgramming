@@ -9,6 +9,7 @@ Then set FLASK_APP environment variable:
 $ export FLASK_APP=bookReviews
 
 Make sure to set the DATABASE_URL and GOODREADS_ID environment variables:
+
 $ export DATABASE_URL=\<postgres db\>
  
 $ export GOODREADS_ID=\<goodreads id\>
