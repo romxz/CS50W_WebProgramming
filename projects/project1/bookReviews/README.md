@@ -9,8 +9,10 @@ Then set FLASK_APP environment variable:
 $ export FLASK_APP=bookReviews
 
 Make sure to set the DATABASE_URL and GOODREADS_ID environment variables:
-$ export DATABASE_URL=<postgres db>
-$ export GOODREADS_ID=<goodreads id>
+$ export DATABASE_URL=\<postgres db\>
+ 
+$ export GOODREADS_ID=\<goodreads id\>
+ 
 
 Then run server from parent folder via:
 $ flask run
