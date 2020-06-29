@@ -1,0 +1,5 @@
+graft flack/database
+graft flack/static
+graft flack/templates
+include flack/.flaskenv
+global-exclude *.pyc

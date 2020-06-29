@@ -37,12 +37,17 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = get_db()
+        
         error = None
-        user = db_tools.get_user(db, username, password)
 
-        if user is None:
-            error = 'Incorrect username or password.'
+        if not username:
+            error = 'Username is required.'
+        elif not password:
+            error = 'Password is required.'
+        else:
+            user = db_tools.get_user(get_db(), username, password)
+            if user is None:
+                error = 'Incorrect username or password.'
         
         if error is None:
             session.clear()
