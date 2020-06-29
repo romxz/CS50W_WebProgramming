@@ -1,0 +1,24 @@
+{% extends 'base.html.jinja' %}
+
+{% block header %}
+    <h1>{% block title %}Channels{% endblock title %}</h1>
+    {% if g.user %}
+        <a class="action" href="{{ url_for('main.create') }}">New</a>
+    {% endif %}
+{% endblock header %}
+
+{% block content %}
+    {% for channel in channels %}
+        <article class="post">
+            <header>
+                <div>
+                    <h1>{{ channel['topic'] }}</h1>
+                    <div class="about">created on {{ channel['created'].strftime('%Y-%m-%d') }}</div>
+                </div>
+            </header>
+        </article>
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}
