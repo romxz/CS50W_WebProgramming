@@ -3,7 +3,7 @@
 {% block header %}
     <h1>{% block title %}Channels{% endblock title %}</h1>
     {% if g.user %}
-        <a class="action" href="{{ url_for('main.create') }}">New</a>
+        <a class="action" href="{{ url_for('lobby.create') }}">New</a>
     {% endif %}
 {% endblock header %}
 
@@ -12,7 +12,7 @@
         <article class="post">
             <header>
                 <div>
-                    <h1>{{ channel['topic'] }}</h1>
+                    <h1><a href="{{ url_for('rooms.index', topic=channel['topic']) }}">{{ channel['topic'] }}</a></h1>
                     <div class="about">created on {{ channel['created'].strftime('%Y-%m-%d') }}</div>
                 </div>
             </header>

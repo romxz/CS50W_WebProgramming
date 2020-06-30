@@ -36,10 +36,13 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.bp)
 
-    # Initialize main feature blueprint
-    from . import main
-    app.register_blueprint(main.bp)
-    # Make 'index' (@ main) root route
-    app.add_url_rule('/', endpoint='index')
+    # Initialize lobby feature blueprint
+    from . import lobby
+    app.register_blueprint(lobby.bp)
+    app.add_url_rule('/', endpoint='lobby.index')
+
+    # Initialize room feature blueprint
+    from . import room
+    app.register_blueprint(room.bp)
 
     return app

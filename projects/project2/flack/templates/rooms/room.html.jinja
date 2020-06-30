@@ -1,0 +1,29 @@
+{% extends 'base.html.jinja' %}
+
+{% block header %}
+    <h1>{% block title %}Topic: {{ topic }}{% endblock title %}</h1>
+    {% if g.user %}
+        <!--<a class="action" href="// url_for('room.post', topic=topic) //">New</a>-->
+    {% endif %}
+{% endblock header %}
+
+{% block content %}
+    {% for message in messages %}
+        <article class="post">
+            <p class="body">{{ message['body'] }}</p>
+            <footer>
+                <div>
+                    <div class="about">by {{ message['username'] }} on {{ message['created'].strftime('%Y-%m-%d') }}</div>
+                </div>
+                {% if g.user['id'] == message['author_id'] %}
+                    Delete
+                    <!--<a class='action' href="// url_for('room.delete', id=message['id']) //">Delete</a>-->
+                {% endif %}
+            </footer>
+            <!--<header></header>-->
+        </article>
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}

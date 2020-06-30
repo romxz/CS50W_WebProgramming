@@ -7,13 +7,13 @@ from flack.auth import login_required
 from flack.db import get_db
 from flack.database import db_tools
 
-bp = Blueprint('main', __name__)
+bp = Blueprint('lobby', __name__, url_prefix='/lobby')
 
 @bp.route('/')
 @login_required
 def index():
     channels = db_tools.get_channels_all(get_db())
-    return render_template('channels/index.html.jinja', channels=channels)
+    return render_template('lobby/index.html.jinja', channels=channels)
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -34,6 +34,6 @@ def create():
             flash(error)
         else:
             db_tools.insert_channel(db, topic)
-            return redirect(url_for('main.index'))
+            return redirect(url_for('lobby.index'))
     
-    return render_template('channels/create.html.jinja')
+    return render_template('lobby/create.html.jinja')

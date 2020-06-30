@@ -1,3 +1,4 @@
+import os
 import sqlite3  # If using sqlite
 #import csv
 import click
@@ -11,6 +12,7 @@ from flask.cli import with_appcontext
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+    app.cli.add_command(fill_db_test)
     #app.cli.add_command(clear_db_command)
     #app.cli.add_command(db_tables_exist_command)
 
@@ -47,3 +49,12 @@ def init_db_command():
     """Clear the existing data and create new tables."""
     init_db()
     click.echo('Initialized the database')
+
+@click.command('fill-db-test')
+@with_appcontext
+def fill_db_test():
+    """Fills database with simple test data."""
+    # Load test data to insert into tables for testing
+    with open(os.path.join(os.path.dirname(__file__), 'database/test_data.sql'), 'rb') as f:
+        _data_sql = f.read().decode('utf8')
+        get_db().executescript(_data_sql)

@@ -42,3 +42,34 @@ def has_channel(db, topic):
 def insert_channel(db, topic):
     db.execute('INSERT INTO channels (topic) VALUES (?)', (topic,))
     db.commit()
+
+def get_messages(db, topic):
+    channel_id = db.execute('SELECT id FROM channels WHERE topic = ?', (topic,)).fetchone()['id']
+    return db.execute(
+        'SELECT * FROM messages WHERE channel_id = ?', (channel_id,)
+    ).fetchall()
+
+def insert_message(db, channel_id, author_id, body):
+    db.execute(
+        'INSERT INTO messages (channel_id, author_id, body)'
+        ' VALUES (?, ?, ?)', (channel_id, author_id, body)
+    )
+    db.commit()
+
+"""
+CREATE TABLE channels (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    topic TEXT NOT NULL UNIQUE,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    channel_id INTEGER NOT NULL,
+    author_id INTEGER NOT NULL,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    body TEXT NOT NULL,
+    FOREIGN KEY (channel_id) REFERENCES channels (id),
+    FOREIGN KEY (author_id) REFERENCES users (id)
+);
+"""
