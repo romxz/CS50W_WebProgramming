@@ -1,6 +1,9 @@
 import os
 
 from flask import Flask
+from flask_session import Session
+
+sess = Session()
 
 def create_app(test_config=None):
     # Create and config app
@@ -31,6 +34,11 @@ def create_app(test_config=None):
     # Initialize db with app
     from . import db
     db.init_app(app)
+
+    # Server-side sessions
+    app.config["SESSION_PERMANENT"] = False
+    app.config["SESSION_TYPE"] = "filesystem"
+    sess.init_app(app)
 
     # Initialize authorization blueprint
     from . import auth

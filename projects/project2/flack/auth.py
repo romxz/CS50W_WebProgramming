@@ -69,6 +69,7 @@ def load_logged_in_user():
 
 @bp.route('/logout')
 def logout():
+    # TODO: Need to make this user-only. Currently: clears out all server-side info
     session.clear()
     return redirect(url_for('lobby.index'))
 

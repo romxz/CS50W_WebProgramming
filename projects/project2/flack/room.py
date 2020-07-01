@@ -1,11 +1,13 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
+from flask_socketio import SocketIO, emit
 from werkzeug.exceptions import abort
 
 from flack.auth import login_required
 from flack.db import get_db
 from flack.database import db_tools
+from collections import deque
 
 bp = Blueprint('rooms', __name__, url_prefix='/rooms')
 
@@ -19,9 +21,37 @@ def index(topic):
             topic = topic[:10] + '...'
         abort(404, f"Channel for topic {topic} doesn't exist.")
     
+    # session
+    g.topic = topic
+    
+    return render_template('rooms/room.html.jinja', topic=topic, messages=get_messages(topic))
+
+def get_messages(topic):
+    # Grab room_topics dictionary if it exists, otherwise create it
+    room_topics = session.get('topics')
+    if room_topics is None:
+        room_topics = dict()
+        session['topics'] = room_topics
+    
     # Get all messages for that topic
-    messages = db_tools.get_messages(db, topic)
-    return render_template('rooms/room.html.jinja', topic=topic, messages=messages)
+    message_limit = 10
+    messages = room_topics.get(topic)
+    if messages is None:
+        messages = deque(maxlen=message_limit)
+        room_topics[topic] = messages
+
+    # Fetch from database if no messages in session
+    if len(messages) == 0:
+        messages.extend(db_tools.get_messages(get_db(), topic, limit=message_limit, as_dicts=True))
+    
+    return messages
+
+@socketio.on("submit message")
+@login_required
+def submit_message(data):
+    pass
+    # TODO: start here. Note: read about Flask-SocketIO sessions
+    # https://blog.miguelgrinberg.com/post/flask-socketio-and-the-user-session
 
 # @bp.route('/create', methods=('GET', 'POST'))
 # @login_required

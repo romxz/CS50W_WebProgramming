@@ -43,11 +43,18 @@ def insert_channel(db, topic):
     db.execute('INSERT INTO channels (topic) VALUES (?)', (topic,))
     db.commit()
 
-def get_messages(db, topic):
+def get_messages(db, topic, limit=100, as_dicts=False):
     channel_id = db.execute('SELECT id FROM channels WHERE topic = ?', (topic,)).fetchone()['id']
-    return db.execute(
-        'SELECT * FROM messages WHERE channel_id = ?', (channel_id,)
+    messages = db.execute(
+        'SELECT * FROM messages WHERE channel_id = ?'
+        ' ORDER BY created DESC LIMIT ?', (channel_id, limit)
     ).fetchall()
+    if as_dicts:
+        ## Hacky solution to: "TypeError: Cannot pickle sqlite3.Row objects"...
+        row_to_dict = lambda row: {k: v for k, v in zip(row.keys(), row)}
+        return map(row_to_dict, messages)
+    else:
+        return messages
 
 def insert_message(db, channel_id, author_id, body):
     db.execute(

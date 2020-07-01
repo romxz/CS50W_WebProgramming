@@ -2,7 +2,7 @@ import os
 import sqlite3  # If using sqlite
 #import csv
 import click
-from flask import current_app, g
+from flask import current_app, g, session
 from flask.cli import with_appcontext
 
 ## If using postgres/sqlalchemy
