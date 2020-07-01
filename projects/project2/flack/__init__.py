@@ -2,8 +2,11 @@ import os
 
 from flask import Flask
 from flask_session import Session
+from flask_socketio import SocketIO
+#from flask_login import LoginManager
 
 sess = Session()
+#login_manager = LoginManager()
 
 def create_app(test_config=None):
     # Create and config app
@@ -39,6 +42,9 @@ def create_app(test_config=None):
     app.config["SESSION_PERMANENT"] = False
     app.config["SESSION_TYPE"] = "filesystem"
     sess.init_app(app)
+
+    ## Setup login extensions
+    #login_manager.init_app(app)
 
     # Initialize authorization blueprint
     from . import auth
