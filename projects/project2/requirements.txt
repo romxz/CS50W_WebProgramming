@@ -2,3 +2,5 @@ Flask
 Flask-SocketIO
 flask_sqlalchemy
 python-dotenv
+flask-session
+flask-login
