@@ -6,6 +6,7 @@ from flask_socketio import SocketIO
 #from flask_login import LoginManager
 
 sess = Session()
+socketio = SocketIO()
 #login_manager = LoginManager()
 
 def create_app(test_config=None):
@@ -46,6 +47,9 @@ def create_app(test_config=None):
     ## Setup login extensions
     #login_manager.init_app(app)
 
+    # Setup sockets
+    socketio.init_app(app, manage_session=False)
+
     # Initialize authorization blueprint
     from . import auth
     app.register_blueprint(auth.bp)
@@ -56,7 +60,7 @@ def create_app(test_config=None):
     app.add_url_rule('/', endpoint='lobby.index')
 
     # Initialize room feature blueprint
-    from . import room
-    app.register_blueprint(room.bp)
+    from . import rooms
+    app.register_blueprint(rooms.bp)
 
     return app

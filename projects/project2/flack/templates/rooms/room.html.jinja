@@ -5,13 +5,14 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
     <!-- Message handlebars JS template -->
     <script id="message-template" type="text/x-handlebars-template">
+        {% raw -%}
         <article class="post" id="{{id}}">
             <p class="body">{{body}}</p>
             <footer>
                 <div class="about">by {{username}} on {{created}}</div>
-                {{#if deletable}}Delete{{/if}}
             </footer>
         </article>
+        {%- endraw %}
     </script>
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/messages.js') }}"></script>
@@ -25,7 +26,7 @@
             <!--<input type="hidden" name="book-submit-review-user-id" id="book-submit-review-user-id" value="// g.user['user_id'] //">-->
             <!--<input type="hidden" name="book-submit-review-book-isbn" id="book-submit-review-book-isbn" value="// topic //" required>-->
             <textarea placeholder="Type a message" name="message-textarea" id="message-textarea"></textarea>
-            <button id="message-submit" data-from="{{ g.user['user_id'] }}"><i class="fa fa-envelope"></i></button>
+            <button id="message-submit" data-from="{{ g.user['username'] }}" data-topic="{{ g.topic }}"><i class="fa fa-envelope"></i></button>
         </div>
         <!--<a class="action" href="// url_for('room.post', topic=topic) //">New</a>-->
     {% endif %}

@@ -6,8 +6,15 @@ from flask import (
 
 from flack.db import get_db
 from flack.database import db_tools
+#from typing import TypedDict, Union
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+# class User(TypedDict):
+#     user_id: int
+#     username: str
+#     topic: Union[str, None]
+
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
@@ -52,6 +59,8 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
+            session['username'] = username
+            session['topic'] = None
             return redirect(url_for('lobby.index'))
         
         flash(error)
