@@ -12,4 +12,5 @@ lecture3/src3/.pylintrc
 .database_url
 **.pyc
 .skey
-env/
+**/env/
+**/venv/
